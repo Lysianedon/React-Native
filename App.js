@@ -1,10 +1,26 @@
 // import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
+import React from 'react'
+import {createContext, useContext, useEffect, useState} from 'react';
+import { StyleSheet, Text, View, ScrollView, Image, Pressable, ActivityIndicator } from 'react-native';
 
 export default function App() {
 
-  handlePress = () => {
+  const [showLoading, setShowLoading] = useState(true);
+
+  const handlePress = () => {
     console.log("you pressed on the button !");
+    // alert('bravo, tu as cliqué !')
+
+    setShowLoading((prevState) => {
+      
+       if (prevState) {
+         prevState = false
+       } else {
+         prevState = true
+       }
+       console.log(prevState);
+    })
+
   }
 
 
@@ -22,10 +38,18 @@ export default function App() {
       style={styles.img}
       source={require('./src/img/konexio-logo_1.png')}/>
 
-      <Pressable onPress={handlePress}>
-        <Text>CLICK ME !</Text>
+      {/* Button  */}
+      <Pressable onPress={handlePress} style={styles.btn}>
+        <Text style={styles.textButton}>CLICK ME !</Text>
       </Pressable>
      
+      {/* ActivityIndicator */}
+      {
+        showLoading ? 
+        ( <ActivityIndicator size="large" color="#00ff00" class='loading'/>)
+        :
+        ( null)
+      }
 
     </ScrollView>
   );
@@ -62,6 +86,19 @@ const styles = StyleSheet.create({
     width: 200,
     height: 60,
     marginLeft: 25,
+  },
+  btn : {
+    width: 200,
+    height: 80,
+    margin: 'auto',
+    marginTop: 15,
+    border: 'red',
+  },
+
+  textButton : {
+    padding: 13,
+    fontSize: 20,
+    color: 'white',
   },
 
 
