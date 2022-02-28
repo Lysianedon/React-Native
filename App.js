@@ -9,17 +9,10 @@ export default function App() {
 
   const handlePress = () => {
     console.log("you pressed on the button !");
-    // alert('bravo, tu as cliqué !')
+    alert('bravo, tu as cliqué !')
 
-    setShowLoading((prevState) => {
-      
-       if (prevState) {
-         prevState = false
-       } else {
-         prevState = true
-       }
-       console.log(prevState);
-    })
+    //Toggle loading status
+    setShowLoading(prevState => !prevState )
 
   }
 
